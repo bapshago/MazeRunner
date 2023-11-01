@@ -158,7 +158,7 @@ LEV7 = [[3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3],
 		[3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3],
 		[3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3]]
 
-LEVELS = [LEV0,LEV1,LEV2,LEV3,LEV4,LEV5,LEV6]
+LEVELS = [LEV0,LEV1,LEV2,LEV3,LEV4,LEV5,LEV6,LEV7]
 
 def resetlevels(selectedlev):
 	return LEVELS[selectedlev]
