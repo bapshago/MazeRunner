@@ -7,6 +7,7 @@ def build_level_variable(inputs,LEVSIZE):
 	gameblocks_output=[]
 	gameblocks_output2=[]
 	gameblocks_output3=[]
+	gameblocks_output4=[]
 	counterrow=1
 	counteritem=1
 	for row in inputs:
@@ -17,10 +18,12 @@ def build_level_variable(inputs,LEVSIZE):
 				gameblocks_output2.append(pygame.Rect([(25*counteritem),(25*counterrow),LEVSIZE,LEVSIZE]))
 			if gameblock == 3:
 				gameblocks_output3.append(pygame.Rect([(25*counteritem),(25*counterrow),LEVSIZE,LEVSIZE]))
+			if gameblock == 4:
+				gameblocks_output4.append([(25*counteritem),(25*counterrow),25,3,6])
 			counteritem=counteritem+1
 		counterrow=counterrow+1
 		counteritem=1
-	return gameblocks_output,gameblocks_output2,gameblocks_output3
+	return gameblocks_output,gameblocks_output2,gameblocks_output3,gameblocks_output4
 
 
 def build_game_board(gameblocks,screen,color,IMG):
