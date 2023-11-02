@@ -94,7 +94,7 @@ while running:
 			else:
 				print("you won")
 				print("Your time was: " + str(timer))
-				player1.score = player1.score + int(timer)-525
+				player1.score = player1.score + 525 - int(timer)
 				selectedlev = selectedlev + 1
 				pygame.display.set_caption(caption)
 				if selectedlev < LEVNUMBERS:
