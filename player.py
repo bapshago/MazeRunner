@@ -18,6 +18,7 @@ class Player():
 		self.boost_time = 0
 		self.boost = False
 		self.boost_time_set = 10
+		self.score = 0
 
 
 	def move_player(self,move_x_pos,move_x_neg,move_y_pos,move_y_neg):

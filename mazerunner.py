@@ -73,6 +73,7 @@ while running:
 
 	if collision_detect(GAMEBLOCKBREAKABLE,player1.rect) > -1:
 		del GAMEBLOCKBREAKABLE[collision_detect(GAMEBLOCKBREAKABLE,player1.rect)]
+		player1.score += 5
 	
 	if collision_detect_cleaners(GAMECLEANERS,player1.rect) > -1:
 		player1.player_boost()
@@ -84,6 +85,7 @@ while running:
 				print("Goal Hit")
 				print(str(len(GAMEGOAL)))
 				del GAMEGOAL[collision_detect(GAMEGOAL,player1.rect)]
+				player1.score += 10
 		else:
 			if len(GAMEBLOCKS) > 1:
 				del GAMEBLOCKS[-1]
@@ -92,8 +94,8 @@ while running:
 			else:
 				print("you won")
 				print("Your time was: " + str(timer))
+				player1.score = player1.score + int(timer)-525
 				selectedlev = selectedlev + 1
-				caption = str('Maze Runner - Level ' + str(selectedlev + 1))
 				pygame.display.set_caption(caption)
 				if selectedlev < LEVNUMBERS:
 					GAMEBLOCKS,GAMEGOAL,GAMEBLOCKBREAKABLE,GAMECLEANERS = build_level_variable(resetlevels(selectedlev),LEVSIZE)
@@ -108,6 +110,9 @@ while running:
 	#cleaner1.display_cleaner(screen)
 	for cleaners in level_cleaners:
 		cleaners.display_cleaner(screen)
+
+	caption = str('Maze Runner - Level ' + str(selectedlev + 1) + " Score: " + str(player1.score))
+	pygame.display.set_caption(caption)
 
 	pygame.draw.rect(screen, (100,0,0),player1.rect)
 	build_game_board(GAMEBLOCKS,screen,GAMEBLOCK_COLOR,BRICKIMG)
