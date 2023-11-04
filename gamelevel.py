@@ -1,15 +1,13 @@
 import pygame
 from constants import *
 
-
-
 def build_level_variable(inputs,LEVSIZE):
 	gameblocks_output=[]
 	gameblocks_output2=[]
 	gameblocks_output3=[]
 	gameblocks_output4=[]
-	counterrow=1
-	counteritem=1
+	counterrow=0
+	counteritem=0
 	for row in inputs:
 		for gameblock in row:
 			if gameblock == 1:
@@ -22,7 +20,7 @@ def build_level_variable(inputs,LEVSIZE):
 				gameblocks_output4.append([(25*counteritem),(25*counterrow),25,3,6])
 			counteritem=counteritem+1
 		counterrow=counterrow+1
-		counteritem=1
+		counteritem=0
 	return gameblocks_output,gameblocks_output2,gameblocks_output3,gameblocks_output4
 
 

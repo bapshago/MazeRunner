@@ -1,10 +1,12 @@
 import pygame
+import pathfinding
 from gamelevel import *
 from collision import *
 from player import *
 from gamelevels import *
 from cleaners import *
 from constants import *
+from mazenpc import *
 
 pygame.init()
 
@@ -13,6 +15,14 @@ screen = pygame.display.set_mode([550,600])
 BRICKIMG = pygame.image.load('brick_wall_25x25.png').convert()
 BRICKIMG2 = pygame.image.load('black_white.png').convert()
 PLAYERIMG = pygame.image.load('player.png').convert()
+
+NPCIMG = pygame.image.load('npc.png').convert()
+#build npc
+npc_1=Npc(25,25,25,5,NPCIMG,LEVELS[selectedlev])
+npc_1.update()
+npc_1.paths_list = LEVELS_NPC[selectedlev]
+npc_1.build_routes()
+
 GAMEBLOCKS,GAMEGOAL,GAMEBLOCKBREAKABLE,GAMECLEANERS = build_level_variable(resetlevels(selectedlev),LEVSIZE)
 player1=Player(PLAYER1_SETUP[0],PLAYER1_SETUP[1],PLAYER1_SETUP[2],PLAYER1_SETUP[3],PLAYER1_SETUP[4])
 pygame.display.set_caption('Maze Runner - Level 1')
@@ -100,6 +110,8 @@ while running:
 				if selectedlev < LEVNUMBERS:
 					GAMEBLOCKS,GAMEGOAL,GAMEBLOCKBREAKABLE,GAMECLEANERS = build_level_variable(resetlevels(selectedlev),LEVSIZE)
 					level_cleaners = build_cleaners()
+					npc_1.paths_list = LEVELS_NPC[selectedlev]
+					npc_1.levelmap=LEVELS[selectedlev]
 					timer=0
 					timerswitch=False
 					#player1.velocity = player1.velocity + 1
@@ -120,6 +132,14 @@ while running:
 	build_game_board(GAMEBLOCKBREAKABLE,screen,GAMEGOAL_COLOR,BRICKIMG)
 	build_game_board(player1.build_players_lives_rects(),screen,GAMEGOAL_COLOR,PLAYERIMG)
 
+	npc_1.automove()
+	npc_1.display(screen)
+
+	test = pygame.Rect.colliderect(npc_1.rect,player1.rect)
+	if test:
+		player1.score=player1.score-10
+
+
 	#timer progress bar
 	if timer > 525:
 		print("You Lost")
@@ -131,6 +151,7 @@ while running:
 			player1.lives = player1.lives - 1
 			GAMEBLOCKS,GAMEGOAL,GAMEBLOCKBREAKABLE,GAMECLEANERS = build_level_variable(resetlevels(selectedlev),LEVSIZE)
 			level_cleaners = build_cleaners()
+
 		else:
 			running=False
 
