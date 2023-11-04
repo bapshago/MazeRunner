@@ -37,9 +37,6 @@ class Npc():
 		if move_position_target_y < self.y:
 			self.y = self.y - self.velocity
 		if move_position_target_y == self.y and move_position_target_x == self.x:
-			#print(self.steps_for_path)
-			print(self.pathscount)
-			print(len(self.paths_list)-1)
 			if len(self.steps_for_path)==1:
 				if self.pathscount == len(self.paths_list)-1:
 					self.pathscount=0

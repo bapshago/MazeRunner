@@ -11,7 +11,7 @@ from mazenpc import *
 pygame.init()
 
 clock = pygame.time.Clock()
-screen = pygame.display.set_mode([550,600])
+screen = pygame.display.set_mode([SCREENX,SCREENY])
 BRICKIMG = pygame.image.load('brick_wall_25x25.png').convert()
 BRICKIMG2 = pygame.image.load('black_white.png').convert()
 PLAYERIMG = pygame.image.load('player.png').convert()
@@ -38,7 +38,33 @@ def build_cleaners():
 
 level_cleaners = build_cleaners()
 
+intro_trigger = True
+
+def startscreen(intro_trigger,status="start",score=0):
+	while intro_trigger:
+		for event in pygame.event.get():
+			if event.type == pygame.QUIT:
+				pygame.quit()
+				
+			if event.type == pygame.KEYDOWN:
+				intro_trigger = False
+				return False
+
+		screen.fill((SCREEN_FILL_COLOR))
+		if status=="start":
+			caption = str('Maze Runner - Press any key to start')
+		if status=="loss":
+			caption = str('Maze Runner - You lost! - '+ str(score) +' -  Press any key to start')
+		if status=="win":
+			caption = str('Maze Runner - You won! - '+ str(score) +' - Press any key to start')
+		pygame.display.set_caption(caption)	
+		pygame.display.flip()
+		clock.tick(60)  # 60 FPS
+
+
+
 while running:
+	intro_trigger = startscreen(intro_trigger)
 	for event in pygame.event.get():
 		if event.type == pygame.QUIT:
 			running = False
@@ -112,12 +138,22 @@ while running:
 					level_cleaners = build_cleaners()
 					npc_1.paths_list = LEVELS_NPC[selectedlev]
 					npc_1.levelmap=LEVELS[selectedlev]
+					npc_1.pathscount = 0
 					timer=0
 					timerswitch=False
 					#player1.velocity = player1.velocity + 1
 				else:
 					print("you won")
-					running = False
+					startscreen(True,status="win",score=player1.score)
+					player1.lives = PLAYER1_SETUP[4]
+					player1.score=0
+					selectedlev=0
+					GAMEBLOCKS,GAMEGOAL,GAMEBLOCKBREAKABLE,GAMECLEANERS = build_level_variable(resetlevels(selectedlev),LEVSIZE)
+					level_cleaners = build_cleaners()
+					npc_1.paths_list = LEVELS_NPC[selectedlev]
+					npc_1.levelmap=LEVELS[selectedlev]
+					timer=0
+					timerswitch=False
 
 	#cleaner1.display_cleaner(screen)
 	for cleaners in level_cleaners:
@@ -135,9 +171,9 @@ while running:
 	npc_1.automove()
 	npc_1.display(screen)
 
-	test = pygame.Rect.colliderect(npc_1.rect,player1.rect)
-	if test:
-		player1.score=player1.score-10
+	npc_penalty = pygame.Rect.colliderect(npc_1.rect,player1.rect)
+	if npc_penalty:
+		player1.score=player1.score - NPC_PENALTY
 
 
 	#timer progress bar
@@ -153,7 +189,16 @@ while running:
 			level_cleaners = build_cleaners()
 
 		else:
-			running=False
+			startscreen(True,status="loss",score=player1.score)
+			player1.lives = PLAYER1_SETUP[4]
+			player1.score=0
+			selectedlev=0
+			GAMEBLOCKS,GAMEGOAL,GAMEBLOCKBREAKABLE,GAMECLEANERS = build_level_variable(resetlevels(selectedlev),LEVSIZE)
+			level_cleaners = build_cleaners()
+			npc_1.paths_list = LEVELS_NPC[selectedlev]
+			npc_1.levelmap=LEVELS[selectedlev]
+			timerswitch=False
+
 
 	else:
 		pygame.draw.rect(screen, GAMEGOAL_COLOR, (0, 525, timer, 50))
@@ -166,4 +211,5 @@ while running:
 		timer=timer+1*DIFFICULTY_FACTOR
 		
 	clock.tick(60)  # 60 FPS
+
 pygame.quit()
