@@ -47,16 +47,17 @@ def startscreen(intro_trigger,status="start",score=0):
 				pygame.quit()
 				
 			if event.type == pygame.KEYDOWN:
-				intro_trigger = False
-				return False
+				if event.key == pygame.K_SPACE:
+					intro_trigger = False
+					return False
 
 		screen.fill((SCREEN_FILL_COLOR))
 		if status=="start":
-			caption = str('Maze Runner - Press any key to start')
+			caption = str('Maze Runner - Press space bar to start')
 		if status=="loss":
-			caption = str('Maze Runner - You lost! - '+ str(score) +' -  Press any key to start')
+			caption = str('Maze Runner - You lost! - '+ str(score) +' -  Press space bar to start')
 		if status=="win":
-			caption = str('Maze Runner - You won! - '+ str(score) +' - Press any key to start')
+			caption = str('Maze Runner - You won! - '+ str(score) +' - Press space bar to start')
 		pygame.display.set_caption(caption)	
 		pygame.display.flip()
 		clock.tick(60)  # 60 FPS
