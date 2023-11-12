@@ -7,7 +7,7 @@ def convert_matrix(matrix_data):
 	for lines in matrix_data:
 		new_matrix_data_row=[]
 		for item in lines:
-			if item == 0 or item == 2 or item == 4:
+			if item == 0 or item == 2 or item == 4 or item==9:
 				new_matrix_data_row.append(1)
 			else:
 				new_matrix_data_row.append(0)

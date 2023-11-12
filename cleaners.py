@@ -1,58 +1,60 @@
 import pygame
+from constants import *
+from gamelevel import *
+from gamelevels import *
 
-class Cleaner():
-	def __init__(self, pos_x, pos_y,rectsize,velocity,animation_speed,cleaner_images):
-		self.x = pos_x
-		self.y = pos_y
-		self.size = rectsize
-		self.rect = pygame.Rect([self.x,self.y,self.size,self.size])
-		self.movelist = []
-		self.velocity = velocity
-		self.velocity_count = 0
-		self.previous_positions = [(0,0),(0,0)]
-		self.animation_speed = animation_speed
-		self.animation_speed_count = 0
-		self.cleaner_images = cleaner_images
-		self.current_image = 0
-
-
-	def move_cleaner(self,move_x_pos,move_x_neg,move_y_pos,move_y_neg):
-		if move_x_pos and self.x < SCREENX-self.size:
-			self.x = self.x + self.velocity
-		if move_x_neg and self.x > 0:
-			self.x = self.x - self.velocity
-		if move_y_pos and self.y < SCREENY-self.size:
-			self.y = self.y + self.velocity
-		if move_y_neg and self.y > 0:
-			self.y = self.y - self.velocity
-		self.update()
-		self.update_previous_position((self.x,self.y))
+class Cleaner_asset():
+	def __init__(self,asset_id,image_files,breakable,capturable,goal,velocity,boost_time,selectedlev):
+		self.image_files=image_files
+		self.breakable=breakable
+		self.capturable=capturable
+		self.goal=goal
+		self.asset_id=asset_id
+		self.LEVSIZE=25
+		self.selectedlev=selectedlev
+		self.rects=build_level_variable(self.asset_id,resetlevels(self.selectedlev),self.LEVSIZE)
+		self.point_value=5
+		self.load_image_files()
+		self.current_image=self.processed_images[0]
+		self.image_count = len(self.processed_images)
+		self.image_current_count = 0
+		self.velocity=velocity
+		self.velocity_count=self.velocity
+		self.boost_time=boost_time
 
 	def update(self):
-		self.rect = pygame.Rect([self.x,self.y,self.size,self.size])
+		pass
 
-	def update_previous_position(self,newposition):
-		if not self.previous_positions[-1] == newposition:
-			if len(self.previous_positions) < 20:
-				self.previous_positions.append(newposition)
+	def load_image_files(self):
+		self.processed_images=[]
+		for image in self.image_files:
+			self.processed_images.append(pygame.image.load(image).convert())
+
+
+	def display_level_rects(self,screen):
+		if self.rects:
+			for cleaners in self.rects:
+				screen.blit(self.current_image,cleaners)
+
+			if self.velocity_count == self.velocity:
+				if self.image_current_count +1 < self.image_count:
+					self.image_current_count = self.image_current_count + 1
+				else:
+					self.image_current_count = 0
+				self.current_image=self.processed_images[self.image_current_count]
+				self.velocity_count= 0
 			else:
-				del self.previous_positions[0]
-				self.previous_positions.append(newposition)
+				self.current_image=self.processed_images[self.image_current_count]
+				self.velocity_count = self.velocity_count + 1
 
 
-	def display_cleaner(self,screen):
-		self.update()
-		if self.current_image > len(self.cleaner_images)-1:
-			self.current_image = 0
-		screen.blit(self.cleaner_images[self.current_image],(self.x,self.y))
-		if self.animation_speed_count == 0:
-			self.current_image=self.current_image + 1
-			self.animation_speed_count = self.animation_speed
-		self.animation_speed_count  = self.animation_speed_count  - 1
-		
+
+	def build_level_rects(self,level):
+		self.selectedlev=level
+		self.rects=build_level_variable(self.asset_id,resetlevels(self.selectedlev),self.LEVSIZE)
+
 
 		
-
 
 
 

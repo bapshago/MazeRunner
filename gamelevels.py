@@ -1,5 +1,9 @@
+import json
+import pygame
+from constants import *
+
 LEV0 = [[1,0,3,3,3,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1],
-		[1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1],
+		[1,0,0,0,0,0,2,0,0,0,0,0,0,0,0,0,0,0,0,1],
 		[1,0,1,0,1,1,1,1,1,1,1,1,0,0,0,0,0,0,0,1],
 		[1,0,1,0,0,4,0,0,0,0,0,0,0,0,1,1,1,1,0,1],
 		[1,0,1,0,1,1,1,1,1,1,1,0,1,0,0,0,0,0,0,1],
@@ -176,8 +180,76 @@ LEV7 = [[3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3],
 
 LEV7NPC=[[[0,7],[8,7]],[[8,7],[0,7]]]
 
-LEVELS = [LEV0,LEV1,LEV2,LEV3,LEV4,LEV5,LEV6,LEV7]
-LEVELS_NPC = [LEV0NPC,LEV1NPC,LEV2NPC,LEV3NPC,LEV4NPC,LEV5NPC,LEV6NPC,LEV7NPC]
+
+LEVELBUILD = [[9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9],
+		[9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9],
+		[9,9,9,1,2,3,4,9,9,9,9,9,9,9,9,9,9,9,9,9],
+		[9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9],
+		[9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9],
+		[9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9],
+		[9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9],
+		[9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9],
+		[9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9],
+		[9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9],
+		[9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9],
+		[9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9],
+		[9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9],
+		[9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9],
+		[9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9],
+		[9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9],
+		[9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9],
+		[9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9],
+		[9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9],
+		[9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9]]
+
+
+#CUSTOMLEVEL=[[1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],[1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],[1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],[1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],[1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]]
+LEVELBUILDNPC=[[[15,15],[14,14]],[[14,14],[15,15]]]
+
+LEVELS = [LEV0,LEV1,LEV2,LEV3,LEV4,LEV5,LEV6,LEV7,LEVELBUILD]
+LEVELS_NPC = [LEV0NPC,LEV1NPC,LEV2NPC,LEV3NPC,LEV4NPC,LEV5NPC,LEV6NPC,LEV7NPC,LEVELBUILDNPC]
+
 def resetlevels(selectedlev):
-	return LEVELS[selectedlev]
-	
+	if selectedlev < 99:
+		return LEVELS[selectedlev]
+	else:
+		with open("customlevels.json", "r") as cust_level_read:
+			json_data_current = cust_level_read.read()
+			cust_level_read = json.loads(json_data_current)
+		selectedcustlev=cust_level_read[selectedlev-100]
+		customlevel=selectedcustlev[0]["CUSTOMLEVEL"]
+		customlevel_npc=selectedcustlev[0]["CUSTOMLEVEL_NPC"][0]
+		return customlevel
+
+def getlevelbuilder():
+	return LEVELBUILD
+
+def get_custom_level(selectedlev):
+	with open("customlevels.json", "r") as cust_level_read:
+		json_data_current = cust_level_read.read()
+		cust_level_read = json.loads(json_data_current)
+	selectedcustlev=cust_level_read[selectedlev-100]
+	customlevel=selectedcustlev[0]["CUSTOMLEVEL"]
+	customlevel_npc=selectedcustlev[0]["CUSTOMLEVEL_NPC"][0]
+	return customlevel,customlevel_npc
+
+def get_custom_level_count():
+	with open("customlevels.json", "r") as cust_level_read:
+		json_data_current = cust_level_read.read()
+		cust_level_read = json.loads(json_data_current)
+	custom_level_count = len(cust_level_read)
+	return custom_level_count
+
+
+def build_custom_level_count_rects():
+	custom_level_count = get_custom_level_count()
+	custom_level_count_rects = []
+	while custom_level_count > 0:
+		rect=pygame.Rect(25*custom_level_count,SCREENY-25,LEVSIZE,LEVSIZE)
+		custom_level_count_rects.append(rect)
+		custom_level_count = custom_level_count - 1
+	return custom_level_count_rects
+
+def show_custom_level_rects(screen):
+	for rect in build_custom_level_count_rects():
+		screen.blit(pygame.image.load(CUSTOMLEVELTHUMBIMAGE).convert(),rect)

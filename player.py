@@ -4,7 +4,7 @@ import math
 from constants import *
 
 class Player():
-	def __init__(self, pos_x, pos_y,rectsize,velocity,lives):
+	def __init__(self, pos_x, pos_y,rectsize,velocity,lives,image_file):
 		self.x = pos_x
 		self.y = pos_y
 		self.size = rectsize
@@ -19,6 +19,9 @@ class Player():
 		self.boost = False
 		self.boost_time_set = 10
 		self.score = 0
+		self.image_file = image_file
+		self.image = pygame.image.load(self.image_file).convert()
+		self.player_lives_rects = self.build_players_lives_rects()
 
 
 	def move_player(self,move_x_pos,move_x_neg,move_y_pos,move_y_neg):
@@ -71,10 +74,17 @@ class Player():
 		while player_life_count > 0:
 			player_lives_rects.append([25*player_life_count-25,SCREENY-25])
 			player_life_count = player_life_count - 1
-		return player_lives_rects
+		self.lives_rects = player_lives_rects
 
-	def player_boost(self):
+	def show_players_lives(self,screen):
+		for rects in self.lives_rects:
+			screen.blit(self.image,rects)
+
+
+	def player_boost(self,boost_time):
 		self.boost = True
+		if boost_time >5:
+			self.boost_time=boost_time
 		self.boost_time = self.boost_time_set
 	
 
