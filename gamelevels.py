@@ -1,4 +1,5 @@
 import json
+import os
 import pygame
 from constants import *
 
@@ -228,10 +229,39 @@ def get_custom_level(selectedlev):
 	with open("customlevels.json", "r") as cust_level_read:
 		json_data_current = cust_level_read.read()
 		cust_level_read = json.loads(json_data_current)
+	print(selectedlev)
+	print(cust_level_read)
 	selectedcustlev=cust_level_read[selectedlev-100]
 	customlevel=selectedcustlev[0]["CUSTOMLEVEL"]
 	customlevel_npc=selectedcustlev[0]["CUSTOMLEVEL_NPC"][0]
 	return customlevel,customlevel_npc
+
+def delete_custom_level(selectedlev):
+	try:
+		with open("customlevels.json", "r") as cust_level_read:
+			json_data_current = cust_level_read.read()
+			cust_level_read = json.loads(json_data_current)
+		print(selectedlev)
+		print(cust_level_read)
+		del cust_level_read[selectedlev-100]
+
+		with open("customlevels.json", "r") as cust_level_read:
+			json_data_current = cust_level_read.read()
+			cust_level_read = json.loads(json_data_current)
+		print(selectedlev)
+		print(cust_level_read)
+		del cust_level_read[selectedlev-100]
+		try:
+			os.remove('customlevel.old')
+		except OSError:
+			pass
+		os.rename('customlevels.json','customlevels.old')
+		with open("customlevels.json", "w") as cust_level_write:
+			cust_level_write.write(json.dumps(cust_level_read))
+		return
+	except Exception as e:
+		print(e)
+
 
 def get_custom_level_count():
 	with open("customlevels.json", "r") as cust_level_read:

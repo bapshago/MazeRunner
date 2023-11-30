@@ -8,27 +8,27 @@ R = (120,120,120)
 # Define the pattern
 PATTERN =[B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,
           B,W,W,W,W,W,W,W,W,W,W,W,W,W,W,W,W,W,W,W,W,W,W,W,B,
-          B,W,B,B,B,B,W,W,B,B,W,W,B,W,W,W,B,W,B,B,B,B,W,W,B,
-          B,W,B,W,W,W,W,B,W,W,B,W,B,W,W,W,B,W,B,W,W,W,W,W,B,
-          B,W,B,B,B,B,W,B,B,B,B,W,W,B,W,B,W,W,B,B,B,W,W,W,B,
-          B,W,W,W,W,B,W,B,W,W,B,W,W,B,W,B,W,W,B,W,W,W,W,W,B,
-          B,W,B,B,B,B,W,B,W,W,B,W,W,W,B,W,W,W,B,B,B,B,W,W,B,
+          B,W,W,W,W,W,W,W,W,W,W,W,W,W,W,W,W,W,W,W,W,W,W,B,B,
+          B,W,B,W,W,B,W,B,W,W,W,B,W,B,B,B,W,W,B,B,B,B,B,W,B,
+          B,W,B,W,W,B,W,B,B,W,W,B,W,B,W,W,B,W,B,W,W,W,B,W,B,
+          B,W,B,W,W,B,W,B,W,B,W,B,W,B,W,W,B,W,B,W,W,W,B,W,B,
+          B,W,B,W,W,B,W,B,W,W,B,B,W,B,W,W,B,W,B,W,W,W,B,W,B,
+          B,W,B,B,B,B,W,B,W,W,W,B,W,B,B,B,W,W,B,B,B,B,B,W,B,
           B,W,W,W,W,W,W,W,W,W,W,W,W,W,W,W,W,W,W,W,W,W,W,W,B,
           B,W,W,W,W,W,W,W,W,W,W,W,W,W,W,W,W,W,W,W,W,W,W,W,B,
+          B,W,W,W,W,W,W,W,W,W,W,W,W,W,W,W,W,W,W,W,W,W,W,B,B,
+          B,W,W,W,W,W,W,B,W,W,W,W,W,W,W,W,W,W,W,W,W,W,W,W,B,
+          B,W,W,W,W,W,B,W,W,W,W,W,W,W,W,W,W,W,W,W,W,W,W,B,B,
+          B,W,W,W,W,B,W,W,W,W,W,W,W,W,W,W,W,W,W,W,W,W,W,W,B,
+          B,W,W,W,B,B,W,W,W,W,W,W,W,W,W,W,W,W,W,W,W,W,W,B,B,
+          B,W,W,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,W,W,W,B,
+          B,W,W,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,W,W,B,B,
+          B,W,W,W,B,B,W,W,W,W,W,W,W,W,W,W,W,W,W,W,W,W,W,W,B,
+          B,W,W,W,W,B,W,W,W,W,W,W,W,W,W,W,W,W,W,W,W,W,W,B,B,
+          B,W,W,W,W,W,B,W,W,W,W,W,W,W,W,W,W,W,W,W,W,W,W,W,B,
+          B,W,W,W,W,W,W,B,W,W,W,W,W,W,W,W,W,W,W,W,W,W,W,B,B,
           B,W,W,W,W,W,W,W,W,W,W,W,W,W,W,W,W,W,W,W,W,W,W,W,B,
-          B,W,W,W,W,B,B,B,B,W,W,W,W,W,W,W,W,W,W,W,W,W,W,W,B,
-          B,W,W,W,W,B,B,B,B,W,W,W,W,W,W,W,W,W,W,W,W,W,W,W,B,
-          B,W,W,W,W,B,B,B,B,W,W,W,W,W,W,W,W,W,W,W,W,W,W,W,B,
-          B,W,W,W,W,B,B,B,B,W,W,W,W,W,W,W,W,W,W,W,W,W,W,W,B,
-          B,W,W,W,W,B,B,B,B,W,W,W,W,W,W,W,W,W,W,W,W,W,W,W,B,
-          B,W,W,W,W,B,B,B,B,W,W,W,W,W,W,W,W,W,W,W,W,W,W,W,B,
-          B,W,W,W,W,B,B,B,B,W,W,W,W,W,W,W,W,W,W,W,W,W,W,W,B,
-          B,W,W,W,W,B,B,B,B,W,W,W,W,W,W,W,W,W,W,W,W,W,W,W,B,
-          B,W,W,W,W,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,W,W,W,W,B,
-          B,W,W,W,W,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,W,W,W,W,B,
-          B,W,W,W,W,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,W,W,W,W,B,
-          B,W,W,W,W,W,W,W,W,W,W,W,W,W,W,W,W,W,W,W,W,W,W,W,B,
-          B,W,B,W,B,W,B,W,B,W,B,W,B,W,B,W,B,W,B,W,B,W,B,W,B,
+          B,W,B,W,B,W,B,W,B,W,B,W,B,W,B,W,B,W,B,W,B,W,B,B,B,
           B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,
           B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,]
 
@@ -38,4 +38,4 @@ img.putdata(PATTERN)
 
 print(img)
 #Save the image
-img.save('savebtn.png')
+img.save('undobtn.png')
